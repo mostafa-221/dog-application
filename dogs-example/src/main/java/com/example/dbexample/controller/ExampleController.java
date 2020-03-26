@@ -7,18 +7,19 @@ import com.example.dbexample.repo.Dog;
 import com.example.dbexample.service.DogsService;
 import com.example.dbexample.model.IdMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class ExampleController {
+public class ExampleController implements ErrorController {
     @Autowired
     private DogsService dogsService;
 
@@ -46,16 +47,46 @@ public class ExampleController {
     }
 
 
-    @PostMapping("/add_dog")
-    public String addDogSubmit(@ModelAttribute Dog dog) {
-        DogDto dogdto = new DogDto();
-        dogdto.setAge(dog.getAge());
-        dogdto.setId(dog.getId());
-        dogdto.setName(dog.getName());
+//    @PostMapping("/add_dog")
+//    public String addDogSubmit(Model model, @ModelAttribute Dog dog)  {
+//        DogDto dogdto = null;
+//        try {
+//            dogdto = new DogDto(dog.getId(),dog.getName(), dog.getAge());
+//        } catch (Exception e) {
+//            GetString getString = new GetString("fout");
+//            model.addAttribute("message", getString);
+//            return "/expectederror";
+//        }
+//
+//        dogsService.add(dogdto);
+//        return "add_dog_result";
+//    }
+
+
+    @RequestMapping(value = "/add_dog", method = RequestMethod.POST)
+    public String addDogSubmit(@ModelAttribute Dog dog, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            FieldError err = result.getFieldError();
+            if (err != null) {
+                GetString getString = new GetString("Error in field:" + err.getField());
+                model.addAttribute("message", getString);
+                return "/expectederror";
+            } else
+                return "/error";
+            }
+
+
+        DogDto dogdto = null;
+        try {
+            dogdto = new DogDto(dog.getId(),dog.getName(), dog.getAge());
+        } catch (Exception e) {
+            GetString getString = new GetString("Error in field:" + e.getLocalizedMessage());
+            model.addAttribute("message", getString);
+            return "/expectederror";
+        }
         dogsService.add(dogdto);
         return "add_dog_result";
     }
-
 
     @GetMapping("/delete_dog")
     public String deleteDog(Model model) {
@@ -85,5 +116,23 @@ public class ExampleController {
     }
 
 
+    @RequestMapping("/error")
+    public ModelAndView handleError() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        return modelAndView;
+    }
 
+    @RequestMapping("/expectederror")
+    public ModelAndView expectedError() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        return modelAndView;
+    }
+
+
+    @Override
+    public String getErrorPath() {
+        return "/error";
+    }
 }
