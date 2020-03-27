@@ -52,11 +52,11 @@ public class ExampleControllerTest {
 
 	}
 
-	@Test
-	public void addDog_shouldreturn_certain_string() throws Exception {
-		String result = exampleControllerTest.addDog(modelMock);
-		assertEquals("add_dog", result);
-	}
+//	@Test
+//	public void addDog_shouldreturn_certain_string() throws Exception {
+//		String result = exampleControllerTest.addDog(modelMock);
+//		assertEquals("add_dog", result);
+//	}
 
 	@Test
 	public void addDogSubmit_shouldreturn_add_dog_result() throws Exception {

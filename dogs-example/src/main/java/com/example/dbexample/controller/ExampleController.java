@@ -47,20 +47,20 @@ public class ExampleController implements ErrorController {
     }
 
 
-    @PostMapping("/add_dog")
-    public String addDogSubmit(Model model, @ModelAttribute Dog dog)  {
-        DogDto dogdto = null;
-        try {
-            dogdto = new DogDto(dog.getId(),dog.getName(), dog.getAge());
-        } catch (Exception e) {
-            GetString getString = new GetString("fout");
-            model.addAttribute("message", getString);
-            return "/expectederror";
-        }
-
-        dogsService.add(dogdto);
-        return "add_dog_result";
-    }
+//    @PostMapping("/add_dog")
+//    public String addDogSubmit(Model model, @ModelAttribute Dog dog)  {
+//        DogDto dogdto = null;
+//        try {
+//            dogdto = new DogDto(dog.getId(),dog.getName(), dog.getAge());
+//        } catch (Exception e) {
+//            GetString getString = new GetString("fout");
+//            model.addAttribute("message", getString);
+//            return "/expectederror";
+//        }
+//
+//        dogsService.add(dogdto);
+//        return "add_dog_result";
+//    }
 
 
     @RequestMapping(value = "/add_dog", method = RequestMethod.POST)
