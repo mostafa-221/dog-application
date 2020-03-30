@@ -1,4 +1,4 @@
-package com.blog.samples.model;
+package com.example.dbexample.model;
 
 import lombok.Getter;
 import lombok.Setter;

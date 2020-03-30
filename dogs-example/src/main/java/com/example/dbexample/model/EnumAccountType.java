@@ -1,4 +1,4 @@
-package com.blog.samples.model;
+package com.example.dbexample.model;
 
 public enum EnumAccountType {
 

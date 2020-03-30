@@ -3,20 +3,12 @@ package com.example.dbexample.controller;
 import com.example.dbexample.model.DogDto;
 import com.example.dbexample.repo.Dog;
 import com.example.dbexample.service.DogsService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties.View;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.StandaloneMockMvcBuilder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
@@ -25,15 +17,12 @@ import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
-
 
 @RunWith(MockitoJUnitRunner.class)
-public class ExampleControllerTest {
+public class DogsControllerTest {
 
 	@InjectMocks
-	private ExampleController exampleControllerTest;
+	private DogsController exampleControllerTest;
 
 	@Mock
 	private Model modelMock;

@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dogs-example-mock-mvc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/dogs_testing_mock_mvc_poging2" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/obsolete/rest-controller-testing-mock-mvc kopie" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rest-controller-testing-mock-mvc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rest-controller-testing-mock-mvc kopie" vcs="Git" />
   </component>
 </project>

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class ExampleController implements ErrorController {
+public class DogsController implements ErrorController {
     @Autowired
     private DogsService dogsService;
 

@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringRunner.class)
 
 @SpringBootTest(webEnvironment= WebEnvironment.MOCK, classes={ DbExampleApplication.class })
-public class AccountControllerTest {
+public class AccountControllerTestMvc {
 
 	private MockMvc mockMvc;
 	

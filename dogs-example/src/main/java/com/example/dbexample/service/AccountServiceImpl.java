@@ -1,6 +1,7 @@
-package com.blog.samples.service;
+package com.example.dbexample.service;
 
-import com.blog.samples.model.Account;
+
+import com.example.dbexample.model.Account;
 import org.springframework.stereotype.Component;
 
 @Component
