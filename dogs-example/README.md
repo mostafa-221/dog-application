@@ -42,24 +42,22 @@ Zo zal public void addDogSubmit_ageZero() throws Exception {... testen of bij ee
 de error pagina wordt aangeroepen en de methode add() van de service niet wordt aangeroepen.
 Uiteraard mag de leeftijd best 0 zijn maar dit is een voorbeeld van valideren.
 
-### OPDRACHT 1 Test correcte afhandeling lege naam
+### Opdracht 1 Endpoint /delete_dog compleet maken
 
-Bouw nu zelf de testmethode met Mockito die test of de error pagina wordt aangeroepen als de naam van de hond leeg is.
+a. Delete endpoint implementeren
+De delete methode werkt nog niet (endpoint /delete_dog). Bouw deze zodat de hond wel wordt verwijderd.
+b. Delete methode van error afhandeling voorzien
+De delete methode graag voorzien van error afhandeling. Als de hondenaam niet wordt ingevuld error pagina tonen met juiste mededeling. Als de hond niet kan worden gevonden de error pagina tonen met juiste mededeling
+c. Tests met mockito ontwikkelen
+Bouw tests om de verschillende afhandelingspaden van /delete_dog in de controller zo volledig mogelijk te teesten
+Voer de tests in IntelliJ uit als test suite inclusief de controle op de dekking.
+Check de getoonde paden in IntelliJ van de test: welke delen van de code worden al dan niet getest? Hoe kun je dat zien?
 
-### OPDRACHT 2 Endpoint /delete_dog compleet maken 
+### Opdracht 2 Bouw unit tests met Mockito voor de overige klassen
+a. Bouw de unit tests voor een van de overige klassen
+b. Check de dekking van deze unit tests.
+Hoe kan ik zien welke paden wel en welke niet zijn gedekt?
+Hoe kan ik zien welk percentage van de code is getest in intelliJ?
+Hoe kan ik zien welke van de tests nog falen in intelliJ?
 
-#### 2a. Delete endpoint implementeren
-De delete methode werkt nog niet (endpoint /delete_dog). 
-Bouw deze zodat de hond wel wordt verwijderd.
 
-#### 2b. Delete methode van error afhandeling voorzien
-De delete methode graag voorzien van error afhandeling. 
-Als de hondenaam niet wordt ingevuld error pagina tonen met juiste mededeling.
-Als de hond niet kan worden gevonden de error pagina tonen met juiste mededeling
-
-#### 2c. Tests met mockito ontwikkelen
-
-- Bouw tests om de verschillende afhandelingspaden van /delete_dog in de controller zo volledig mogelijk te teesten
-- Voer de tests in IntelliJ uit als test suite inclusief de controle op de dekking.
-- Check de getoonde paden in IntelliJ van de test: welke delen van de code worden al dan niet getest? 
-Hoe kun je dat zien?
