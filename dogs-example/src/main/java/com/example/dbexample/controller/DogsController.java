@@ -90,18 +90,43 @@ public class DogsController implements ErrorController {
 
     @GetMapping("/delete_dog")
     public String deleteDog(Model model) {
-        model.addAttribute("idMessage", new IdMessage());
+        model.addAttribute("dog", new Dog());
         return "delete_dog";
     }
 
-    @PostMapping("/delete_dog")
-    public String deleteSubmit(Model model, @ModelAttribute IdMessage idMessage) {
-        Dog dog = new Dog();
+    @RequestMapping(value = "/delete_dog", method = RequestMethod.POST)
+    public String deleteSubmit(@ModelAttribute Dog dog, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            FieldError err = result.getFieldError();
+            if (err != null) {
+                GetString getString = new GetString("Error in field:" + err.getField());
+                model.addAttribute("message", getString);
+                return "/expectederror";
+            } else
+                return "/error";
+        }
 
-        model.addAttribute("dog", dog);
-        model.addAttribute("idMessage", idMessage);
-        return "delete_dog_confirm";
+
+        DogDto dogdto = null;
+        try {
+            dogdto = new DogDto(dog.getId(),dog.getName(), dog.getAge());
+        } catch (Exception e) {
+            GetString getString = new GetString("Error in field:" + e.getLocalizedMessage());
+            model.addAttribute("message", getString);
+            return "/expectederror";
+        }
+        dogsService.delete(dogdto.getName());
+        return "add_dog_result";
     }
+
+//    @PostMapping("/delete_dog")
+//    public String deleteSubmit(Model model, @ModelAttribute IdMessage idMessage) {
+//        Dog dog = new Dog();
+//
+//        model.addAttribute("dog", dog);
+//        model.addAttribute("idMessage", idMessage);
+//        return "delete_dog_confirm";
+//    }
 
     @RequestMapping("/list")
     public String countsList(Model model) {

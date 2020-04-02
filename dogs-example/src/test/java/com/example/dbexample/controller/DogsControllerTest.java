@@ -12,6 +12,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.times;
@@ -71,7 +73,11 @@ public class DogsControllerTest {
 		verify(dogsServiceMock, times(0)).add(isA(DogDto.class));
 	}
 
-
+	@Test
+	public void testOldDogs(){
+		String result = exampleControllerTest.countsOldList(modelMock);
+		assertEquals("list", result);
+	}
 
 
 
