@@ -26,8 +26,15 @@ public class DogsService {
         repository.deleteById(id);
     }
 
-    public Long getDogIdByName(String dogName) {
-        return repository.findByName(dogName).getId();
+    public Long getDogIdByName(String dogName) throws DogNotFoundException {
+        Dog dog = repository.findByName(dogName);
+
+        if(dog == null) {
+            String error = String.format("Dog name '%s' not found in database", dogName);
+            throw new DogNotFoundException(error);
+        }
+
+        return dog.getId();
     }
 
     public List<Dog> getDogs() {

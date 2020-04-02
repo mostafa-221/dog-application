@@ -4,6 +4,7 @@ package com.example.dbexample.controller;
 import com.example.dbexample.model.DogDto;
 import com.example.dbexample.model.GetString;
 import com.example.dbexample.repo.Dog;
+import com.example.dbexample.service.DogNotFoundException;
 import com.example.dbexample.service.DogsService;
 import com.example.dbexample.model.IdMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,17 +94,40 @@ public class DogsController implements ErrorController {
 
     @PostMapping("/delete_dog")
     public String deleteSubmit(@ModelAttribute IdMessage message, BindingResult result, Model model) {
+        boolean error = false;
+        GetString errorText = new GetString("");
+
+        // Binding result error
         if (result.hasErrors()) {
             FieldError err = result.getFieldError();
             if (err != null) {
-                GetString getString = new GetString("Error in field:" + err.getField());
-                model.addAttribute("message", getString);
-                return "/expectederror";
-            } else
+                errorText.setContent("Error in field:" + err.getField());
+            }
+            else
                 return "/error";
         }
 
-        Long id = dogsService.getDogIdByName(message.getContent());
+        // Empty name error
+        if(message.getContent().equals("")) {
+            errorText.setContent("Error: No dog name entered for deletion");
+        }
+
+        // Get dog id based on dog name
+        Long id = 0L;
+        try {
+            id = dogsService.getDogIdByName(message.getContent());
+        }
+        catch (DogNotFoundException e) {
+            // Unknown dog error
+            if(errorText.getContent().equals(""))
+                errorText.setContent("Error: " + e.getMessage());
+        }
+
+        // Show error page if needed
+        if(!errorText.getContent().equals("")) {
+            model.addAttribute("message", errorText);
+            return "/expectederror";
+        }
 
         dogsService.delete(id);
         return "delete_dog_confirm";
