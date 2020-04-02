@@ -50,4 +50,8 @@ public class DogsService {
     public Object getOldDogs() {
         return (List<Dog>) repository.findOldDogs();
     }
+
+    public void delete(String name) {
+        repository.deleteByName(name);
+    }
 }

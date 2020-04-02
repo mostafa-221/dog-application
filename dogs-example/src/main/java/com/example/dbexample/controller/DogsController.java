@@ -98,6 +98,8 @@ public class DogsController implements ErrorController {
     public String deleteSubmit(Model model, @ModelAttribute IdMessage idMessage) {
         Dog dog = new Dog();
 
+        dogsService.delete(idMessage.getContent());
+
         model.addAttribute("dog", dog);
         model.addAttribute("idMessage", idMessage);
         return "delete_dog_confirm";
