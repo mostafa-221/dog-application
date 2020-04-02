@@ -112,15 +112,15 @@ public class DogsController implements ErrorController {
             errorText.setContent("Error: No dog name entered for deletion");
         }
 
-        // Get dog id based on dog name
+        // Get dog id based on dog name, only if no error occurred already
         Long id = 0L;
-        try {
-            id = dogsService.getDogIdByName(message.getContent());
-        }
-        catch (DogNotFoundException e) {
-            // Unknown dog error
-            if(errorText.getContent().equals(""))
+        if(errorText.getContent().equals("")) {
+            try {
+                id = dogsService.getDogIdByName(message.getContent());
+            } catch (DogNotFoundException e) {
+                // Unknown dog error
                 errorText.setContent("Error: " + e.getMessage());
+            }
         }
 
         // Show error page if needed
