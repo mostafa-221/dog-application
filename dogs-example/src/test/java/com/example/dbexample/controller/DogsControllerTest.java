@@ -1,6 +1,7 @@
 package com.example.dbexample.controller;
 
 import com.example.dbexample.model.DogDto;
+import com.example.dbexample.model.IdMessage;
 import com.example.dbexample.repo.Dog;
 import com.example.dbexample.service.DogsService;
 import org.junit.Before;
@@ -69,6 +70,19 @@ public class DogsControllerTest {
 		result = exampleControllerTest.addDogSubmit(dog, bindingResultMock, modelMock);
 		assertEquals("/expectederror", result);
 		verify(dogsServiceMock, times(0)).add(isA(DogDto.class));
+	}
+
+	@Test
+	public void deleteDogSubmit_result() throws Exception {
+		Dog dog = new Dog();
+		dog.setAge(5);
+		dog.setName("Testdog");
+
+		IdMessage idMessage = new IdMessage();
+		idMessage.setContent("Testdog");
+
+		String deleteResult = exampleControllerTest.deleteSubmit(modelMock, idMessage);
+		assertEquals("delete_dog_confirm", deleteResult);
 	}
 
 
