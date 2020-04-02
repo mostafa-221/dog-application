@@ -6,7 +6,10 @@
 </head>
 <body>
 
-<p th:text="'to be deleted dog: ' + ${idMessage.content}" />
+<p th:text="'Dog ' + ${idMessage.content} + ' has been deleted.'" />
 
+<a href="/add_dog">Add another dog</a>
+<a href="/delete_dog">Delete another dog</a>
+<a href="/list">List dogs</a>
 </body>
 </html>

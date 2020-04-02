@@ -15,9 +15,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class DogsController implements ErrorController {
     @Autowired
@@ -95,11 +92,20 @@ public class DogsController implements ErrorController {
     }
 
     @PostMapping("/delete_dog")
-    public String deleteSubmit(Model model, @ModelAttribute IdMessage idMessage) {
-        Dog dog = new Dog();
+    public String deleteSubmit(@ModelAttribute IdMessage message, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            FieldError err = result.getFieldError();
+            if (err != null) {
+                GetString getString = new GetString("Error in field:" + err.getField());
+                model.addAttribute("message", getString);
+                return "/expectederror";
+            } else
+                return "/error";
+        }
 
-        model.addAttribute("dog", dog);
-        model.addAttribute("idMessage", idMessage);
+        Long id = dogsService.getDogIdByName(message.getContent());
+
+        dogsService.delete(id);
         return "delete_dog_confirm";
     }
 

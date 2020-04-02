@@ -14,5 +14,7 @@ public interface DogsRepository extends CrudRepository<Dog, Long> {
     @Query(value = "select id, name, age from dog where age > 10 order by name", nativeQuery = true)
     List<Dog> findOldDogs();
 
+    Dog findByName(String name);
+
     Object findAll(Sort name);
 }

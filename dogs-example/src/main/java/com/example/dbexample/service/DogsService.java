@@ -22,15 +22,17 @@ public class DogsService {
         repository.save(toEntity(dto));
     }
 
-    public void delete(long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public Long getDogIdByName(String dogName) {
+        return repository.findByName(dogName).getId();
     }
 
     public List<Dog> getDogs() {
         return (List<Dog>) repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
-
-
 
 
     public Dog getDogById(long id) {
@@ -44,8 +46,6 @@ public class DogsService {
         entity.setAge(dto.getAge());
         return entity;
     }
-
-
 
     public Object getOldDogs() {
         return (List<Dog>) repository.findOldDogs();
